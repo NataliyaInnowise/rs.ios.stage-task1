@@ -7,7 +7,12 @@
     NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
     NSNumber *number = [numberFormatter numberFromString:self];
     
-    return (number != nil);
+   // return (number != nil);
+    if (number) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 @end
