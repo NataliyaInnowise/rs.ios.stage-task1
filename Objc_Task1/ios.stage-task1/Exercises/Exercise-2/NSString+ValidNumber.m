@@ -1,18 +1,22 @@
 #import "NSString+ValidNumber.h"
 
 @implementation NSString (ValidNumber)
+static NSNumberFormatter *customFormatter = nil;
+
++(NSNumberFormatter *)numberFormatter {
+    if (customFormatter) { return customFormatter; }
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+ //   formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    customFormatter = formatter;
+    return customFormatter;
+}
 
 - (BOOL)isValidNumber {
-   // NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
-    NSNumber *number = [numberFormatter numberFromString:self];
+    NSNumber *number = [[[self class] numberFormatter] numberFromString:self];
     
-   // return (number != nil);
-    if (number) {
-        return true;
-    } else {
-        return false;
-    }
+    // return (number != nil);
+    return (number) ? YES : NO;
 }
 
 @end

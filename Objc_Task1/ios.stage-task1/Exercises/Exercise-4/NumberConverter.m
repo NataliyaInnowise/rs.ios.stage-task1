@@ -4,20 +4,22 @@
 
 - (NSArray *)numberConverter:(NSNumber *)number {
     
-    if (number == nil) {
+    if (!number) {
         return @[];
     }
-
+    
     NSString *string = [number stringValue];
     string = [string stringByReplacingOccurrencesOfString:@"-" withString:@""];
     
-    NSMutableArray *arrayToReturn = [NSMutableArray new];
+    NSMutableArray *arrayToReturn = [NSMutableArray arrayWithCapacity: string.length];
     
     for (NSInteger index = string.length - 1; index >= 0; index--) {
         UniChar character = [string characterAtIndex:index];
         NSString *charToAdd = [NSString stringWithFormat: @"%c", character];
-        [arrayToReturn addObject:charToAdd];
+        NSInteger newIndex = string.length - 1 -index;
+        [arrayToReturn insertObject:charToAdd atIndex:newIndex];
     }
+    
     return arrayToReturn;
 }
 @end
